@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,7 +44,7 @@ public class AddContact extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_contact);
+        setContentView(R.layout.activity_add_contact);
 
 
         editLastName = (EditText) findViewById(R.id.txtLastName);
@@ -56,6 +57,9 @@ public class AddContact extends AppCompatActivity {
         editCountry = (EditText) findViewById(R.id.txtCountry);
         editPhone = (EditText) findViewById(R.id.txtPhone);
         editEmail = (EditText) findViewById(R.id.txtEmail);
+
+        editPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
 
     }
 

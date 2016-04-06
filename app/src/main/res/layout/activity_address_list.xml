@@ -14,14 +14,10 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtInput" />
+        android:id="@+id/txtSearch"
+        android:hint="Name"
+        />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:id="@+id/btnLaunch"
-        android:onClick="launchAnotherScreen"/>
 
     <Button
         android:layout_width="match_parent"
@@ -42,6 +38,7 @@
 
     <ListView
         android:id="@+id/lstContactList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textFilterEnabled="false" />
 </LinearLayout>

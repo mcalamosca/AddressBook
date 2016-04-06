@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,10 +36,7 @@ public class EditContact extends AppCompatActivity {
     private EditText editPhone;
     private EditText editEmail;
 
-    private Button btnSubmit;
-
     private String contactId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +54,9 @@ public class EditContact extends AppCompatActivity {
         editCountry = (EditText) findViewById(R.id.txtCountry);
         editPhone = (EditText) findViewById(R.id.txtPhone);
         editEmail = (EditText) findViewById(R.id.txtEmail);
+
+        editPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
 
         Intent intent = getIntent();
 
@@ -78,7 +79,17 @@ public class EditContact extends AppCompatActivity {
     public void returnHome(View v){
         Intent intent = new Intent(EditContact.this,AddressList.class);
 
-        EditContact.this.startActivity(intent);    }
+        EditContact.this.startActivity(intent);
+    }
+
+    public void deleteUser(View v){
+        SqliteUtilities db = new SqliteUtilities(this);
+        db.deleteRecord("mycontacts","id = ?", new String[]{contactId});
+        db.close();
+        Intent intent = new Intent(EditContact.this,AddressList.class);
+
+        EditContact.this.startActivity(intent);
+    }
 
     private void saveUserInfo(){
         ContentValues initialValues = new ContentValues();
@@ -117,7 +128,7 @@ public class EditContact extends AppCompatActivity {
 
 }
 
-
+    //Load user info from databse using userId
     protected void loadUserInfo(){
         //System.out.println(contactId);
         Contact contact = null;

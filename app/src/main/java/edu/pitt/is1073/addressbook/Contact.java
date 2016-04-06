@@ -124,6 +124,6 @@ public class Contact {
     }
     @Override
     public String toString(){
-        return this.lastName + ", " + this.firstName;
+        return this.lastName + ", " + this.firstName + "    " + this.phone;
     }
 }

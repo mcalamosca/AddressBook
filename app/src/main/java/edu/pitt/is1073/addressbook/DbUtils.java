@@ -34,7 +34,7 @@ public class DbUtils extends SQLiteOpenHelper {
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + "("+
-            KEY_ROW_ID+" int(36) ,"+
+            KEY_ROW_ID+" varchar(100) not null,"+
             KEY_LASTNAME+"  varchar(100) not null,"+
             KEY_FIRSTNAME+"  varchar(100) not null,"+
             KEY_ADDRESS+"  varchar(100) not null,"+
@@ -65,6 +65,9 @@ public class DbUtils extends SQLiteOpenHelper {
 
     public void deleteRow(long rowID){
         db.delete(TABLE_NAME, KEY_ROW_ID+"="+rowID,null);
+    }
+    public void deleteTable(){
+        db.delete(TABLE_NAME, "DELETE FROM "+ TABLE_NAME + ";",null);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {

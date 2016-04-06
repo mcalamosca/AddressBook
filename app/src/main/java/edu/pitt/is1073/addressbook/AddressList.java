@@ -3,6 +3,7 @@ package edu.pitt.is1073.addressbook;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +30,7 @@ public class AddressList extends AppCompatActivity {
     }
 
     public void launchAddContact(View view){
-        Intent intent = new Intent(AddressList.this,EditContact.class);
+        Intent intent = new Intent(AddressList.this,AddContact.class);
 
         AddressList.this.startActivity(intent);
     }
@@ -58,23 +59,25 @@ public class AddressList extends AppCompatActivity {
         lstContactList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Create contact according to position on listView
                 Contact selectedContact = contactList.get(position);
                 String selectedContactID = selectedContact.getId();
+
+                //Get contact ID and send to EditContact
+                Intent intent = new Intent(AddressList.this, EditContact.class);
+                intent.putExtra("contactId", selectedContactID);
+                intent.putExtra("loadContact", true);
+                AddressList.this.startActivity(intent);
+
+
                 Toast.makeText(getApplicationContext(), selectedContactID, Toast.LENGTH_LONG).show();
             }
         });
     }
-
-    private void insertTestValues(String firstName, String lastName){
-
+    public void resetDatabase(View view){
         SqliteUtilities db = new SqliteUtilities(this);
-        ContentValues cv = new ContentValues();
+        db.deleteTable();
 
-        cv.put("id", UUID.randomUUID().toString());
-        cv.put("first_name", firstName);
-        cv.put("last_name", lastName);
-
-
-        db.insertRecord("addressBook", cv);
+        lstContactList.invalidateViews();
     }
 }

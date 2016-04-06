@@ -31,6 +31,10 @@ public class Contact {
         this.email = email;
     }
 
+    public Contact(String id){
+
+    }
+
     public String getId() {
         return id;
     }

@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SqliteUtilities extends SQLiteOpenHelper {
 	public static final String DATABASE_NAME = "addressBook";
 	public static final String TABLE_NAME = "mycontacts";
-	public static final int DATABASE_VERSION = 2;
+	public static final int DATABASE_VERSION = 1;
 
 
 	public static final String KEY_ROW_ID = "id";
@@ -26,7 +26,7 @@ public class SqliteUtilities extends SQLiteOpenHelper {
 
 	private static final String TABLE_CREATE =
 			"CREATE TABLE " + TABLE_NAME + "("+
-					KEY_ROW_ID+" int(36) ,"+
+					KEY_ROW_ID+" varchar(36) not null ,"+
 					KEY_LASTNAME+"  varchar(100) not null,"+
 					KEY_FIRSTNAME+"  varchar(100) not null,"+
 					KEY_ADDRESS+"  varchar(100) not null,"+
@@ -36,7 +36,7 @@ public class SqliteUtilities extends SQLiteOpenHelper {
 					KEY_ZIP+"  varchar(100) not null,"+
 					KEY_COUNTRY+"  varchar(100) not null,"+
 					KEY_PHONE+"  varchar(100),"+
-					KEY_EMAIL+"  varchar(255) not null,"+
+					KEY_EMAIL+"  varchar(320) not null,"+
 					"PRIMARY KEY (`"+KEY_ROW_ID+"`));";
 	/**
 	 * Default constructor.  Currently doesn't do anything except initializing
@@ -108,6 +108,10 @@ public class SqliteUtilities extends SQLiteOpenHelper {
 	public void deleteRecord(String tableName, String whereClause, String[] whereArgs){
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(tableName, whereClause, whereArgs);
+	}
+	public void deleteTable(){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_NAME,"",null);
 	}
 	
 	/**

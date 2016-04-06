@@ -1,13 +1,17 @@
 package edu.pitt.is1073.addressbook;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class AddContact extends AppCompatActivity {
+import java.sql.SQLClientInfoException;
+import java.util.UUID;
+
+public class EditContact extends AppCompatActivity {
     public static final String KEY_ROW_ID = "id";
     public static final String KEY_LASTNAME = "last_name";
     public static final String KEY_FIRSTNAME = "first_name";
@@ -39,6 +43,7 @@ public class AddContact extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
+
         editLastName = (EditText) findViewById(R.id.txtLastName);
         editFirstName = (EditText) findViewById(R.id.txtFirstName);
         editAddress = (EditText) findViewById(R.id.txtAddress);
@@ -52,9 +57,17 @@ public class AddContact extends AppCompatActivity {
 
     }
 
-    public void buttonOnClick(View v){
+    public void submitContact(View v){
         saveUserInfo();
+        Intent intent = new Intent(EditContact.this,AddressList.class);
+
+        EditContact.this.startActivity(intent);
     }
+
+    public void returnHome(View v){
+        Intent intent = new Intent(EditContact.this,AddressList.class);
+
+        EditContact.this.startActivity(intent);    }
 
     private void saveUserInfo(){
         ContentValues initialValues = new ContentValues();
@@ -74,6 +87,7 @@ public class AddContact extends AppCompatActivity {
         //System.out.println(lastName + " " + firstName);
 
         //Put strings in ContentValues
+        initialValues.put(KEY_ROW_ID, UUID.randomUUID().toString());
         initialValues.put(KEY_FIRSTNAME,firstName);
         initialValues.put(KEY_LASTNAME,lastName);
         initialValues.put(KEY_ADDRESS,address);
@@ -84,6 +98,9 @@ public class AddContact extends AppCompatActivity {
         initialValues.put(KEY_COUNTRY,country);
         initialValues.put(KEY_PHONE,phone);
         initialValues.put(KEY_EMAIL,email);
+
+        SqliteUtilities db = new SqliteUtilities(this);
+        db.insertRecord("mycontacts",initialValues);
 
 
         /*
@@ -98,5 +115,11 @@ public class AddContact extends AppCompatActivity {
         KEY_PHONE
         KEY_EMAIL
         */
+
+}
+    private void loadUserInfo(){
+        SqliteUtilities db = new SqliteUtilities(this);
+        String sql = "SELECT id, last_name, first_name, address, address2, city, state, zip, country, phone, email FROM mycontacts ORDER BY last_name;";
+
     }
 }

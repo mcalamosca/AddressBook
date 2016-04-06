@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Address Book</string>
-    <string name="no_notes">Sorry, no contacts</string>
     <string name="menu_insert">Add new contact</string>
     <string name="menu_delete">Delete contact</string>
 </resources>

@@ -32,23 +32,9 @@ public class DbUtils extends SQLiteOpenHelper {
     public static final String KEY_EMAIL = "email";
 
 
-    public static final String PROJECTION[] = {
-            KEY_ROW_ID,
-            KEY_LASTNAME,
-            KEY_FIRSTNAME,
-            KEY_ADDRESS,
-            KEY_ADDRESS2,
-            KEY_CITY,
-            KEY_STATE,
-            KEY_ZIP,
-            KEY_COUNTRY,
-            KEY_PHONE,
-            KEY_EMAIL
-    };
-
     private static final String TABLE_CREATE =
-            "CREATE TABLE " + TABLE_NAME + "("+KEY_ROW_ID
-            +" int(11) NOT NULL AUTO_INCREMENT,"+
+            "CREATE TABLE " + TABLE_NAME + "("+
+            KEY_ROW_ID+" int(36) ,"+
             KEY_LASTNAME+"  varchar(100) not null,"+
             KEY_FIRSTNAME+"  varchar(100) not null,"+
             KEY_ADDRESS+"  varchar(100) not null,"+
@@ -64,13 +50,12 @@ public class DbUtils extends SQLiteOpenHelper {
     public DbUtils(Context context) throws FileNotFoundException {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
-        db = context.openOrCreateDatabase(DATABASE_NAME, 0, null);
-
+        //db = context.openOrCreateDatabase(DATABASE_NAME, 0, null);
 
     }
 
     public void createRow(String tableName, ContentValues vals){
-        //SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         db.insert(tableName, null, vals);
     }
 
@@ -89,5 +74,10 @@ public class DbUtils extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //leave alone
+    }
+
+    public Cursor getResultSet(String sql){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(sql,null);
     }
 }

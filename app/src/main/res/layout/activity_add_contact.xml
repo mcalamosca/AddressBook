@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.pitt.is1073.addressbook.AddContact">
+    tools:context=".EditContact">
 
     <LinearLayout
         android:orientation="vertical"
@@ -276,14 +276,15 @@
                 android:text="Submit"
                 android:id="@+id/btnSubmit"
                 android:layout_weight="0.50"
-                android:onClick="buttonOnClick" />
+                android:onClick="submitContact" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cancel"
                 android:id="@+id/txtCancel"
-                android:layout_weight="0.50" />
+                android:layout_weight="0.50"
+                android:onClick="returnHome" />
         </LinearLayout>
 
     </LinearLayout>

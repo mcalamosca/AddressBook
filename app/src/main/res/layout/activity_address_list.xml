@@ -30,7 +30,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reset Database"
+        android:text="Clear Contacts"
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
         android:nestedScrollingEnabled="false"

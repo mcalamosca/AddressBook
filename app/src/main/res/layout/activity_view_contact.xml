@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.pitt.is1073.addressbook.EditContact">
+    tools:context="edu.pitt.is1073.addressbook.ViewContact">
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,17 +27,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="First Name"
+                android:text="First Name:"
                 android:id="@+id/lblFirstName"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtFirstName"
                 android:inputType="textPersonName"
-                android:textSize="15dp" />
+                android:textSize="22dp"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -49,18 +51,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Last Name"
+                android:text="Last Name:"
                 android:id="@+id/lblLastName"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtLastName"
                 android:inputType="textPersonName"
-                android:textSize="15dp"
-                android:onClick="deleteUser" />
+                android:textSize="22dp"
+                android:onClick="deleteUser"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,17 +76,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Phone"
+                android:text="Phone:"
                 android:id="@+id/lblPhone"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtPhone"
                 android:inputType="phone"
-                android:textSize="15dp" />
+                android:textSize="22dp"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false"
+                android:autoLink="phone" />
         </LinearLayout>
 
         <LinearLayout
@@ -94,17 +101,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Address"
+                android:text="Address:"
                 android:id="@+id/lblAddress"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtAddress"
                 android:inputType="textPostalAddress"
-                android:textSize="15dp" />
+                android:textSize="22dp"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -116,17 +125,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Address 2"
+                android:text="Address 2:"
                 android:id="@+id/lblAddress2"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtAddress2"
                 android:inputType="textPostalAddress"
-                android:textSize="15dp" />
+                android:textSize="22dp"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -138,17 +149,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="City"
+                android:text="City:"
                 android:id="@+id/lblCity"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtCity"
                 android:inputType="textPostalAddress"
-                android:textSize="15dp" />
+                android:textSize="22dp"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -160,17 +173,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="State"
+                android:text="State:"
                 android:id="@+id/lblState"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtState"
                 android:inputType="textPostalAddress"
-                android:textSize="15dp" />
+                android:textSize="22dp"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -182,17 +197,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Zip"
+                android:text="Zip:"
                 android:id="@+id/lblZip"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtZip"
                 android:inputType="number"
-                android:textSize="15dp" />
+                android:textSize="22dp"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -204,17 +221,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Country"
+                android:text="Country:"
                 android:id="@+id/lblCountry"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtCountry"
                 android:inputType="textPostalAddress"
-                android:textSize="15dp" />
+                android:textSize="22dp"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -226,17 +245,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Email"
+                android:text="Email:"
                 android:id="@+id/lblEmail"
                 android:layout_margin="4dp"
                 android:textSize="22dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/txtEmail"
                 android:inputType="textEmailAddress"
-                android:textSize="15dp" />
+                android:textSize="22dp"
+                android:layout_marginTop="5dp"
+                android:textIsSelectable="false"
+                android:autoLink="email"/>
         </LinearLayout>
 
         <LinearLayout
@@ -250,20 +272,20 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit"
-                android:id="@+id/btnSubmit"
-                android:layout_weight="0.33"
-                android:onClick="submitContact" />
+                android:text="Edit"
+                android:id="@+id/btnEdit"
+                android:layout_weight="0.5"
+                android:onClick="editContact" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
+                android:text="Home"
                 android:id="@+id/txtCancel"
-                android:layout_weight="0.33"
+                android:layout_weight="0.5"
                 android:onClick="returnHome" />
 
-            <Button
+            Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Delete"

@@ -1,8 +1,10 @@
 package edu.pitt.is1073.addressbook;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -83,12 +85,35 @@ public class EditContact extends AppCompatActivity {
     }
 
     public void deleteUser(View v){
-        SqliteUtilities db = new SqliteUtilities(this);
-        db.deleteRecord("mycontacts","id = ?", new String[]{contactId});
-        db.close();
-        Intent intent = new Intent(EditContact.this,AddressList.class);
+        final SqliteUtilities db = new SqliteUtilities(this);
 
-        EditContact.this.startActivity(intent);
+        //Confirm delete user alert
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Are you sure?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        db.deleteRecord("mycontacts", "id = ?", new String[]{contactId});
+                        db.close();
+                        Intent intent = new Intent(EditContact.this, AddressList.class);
+
+                        EditContact.this.startActivity(intent);
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert1 = builder1.create();
+        alert1.show();
     }
 
     private void saveUserInfo(){

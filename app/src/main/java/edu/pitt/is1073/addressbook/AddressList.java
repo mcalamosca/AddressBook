@@ -1,9 +1,9 @@
 package edu.pitt.is1073.addressbook;
 
-import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,19 +13,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.UUID;
 
 public class AddressList extends AppCompatActivity {
 
     private ListView lstContactList;
     private ArrayList<Contact> contactList;
     private ArrayList<String> contactNames;
-    private EditText searchText;
+    private EditText txtSearch;
     ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +30,7 @@ public class AddressList extends AppCompatActivity {
         setContentView(R.layout.activity_address_list);
 
         initControls();
-        searchText.addTextChangedListener(new TextWatcher() {
+        txtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -41,14 +38,14 @@ public class AddressList extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().equals("")){
+                if (s.toString().equals("")) {
                     //reset list
                     initControls();
-                }
-                else{
+                } else {
                     //perform search
                     searchList(s.toString());
                 }
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -78,7 +75,7 @@ public class AddressList extends AppCompatActivity {
     private void initControls(){
         //Populate list with contacts in database
         lstContactList = (ListView) findViewById(R.id.lstContactList);
-        searchText = (EditText) findViewById(R.id.txtSearch);
+        txtSearch = (EditText) findViewById(R.id.txtSearch);
         contactList = new ArrayList<Contact>();
         contactNames = new ArrayList<String>();
 
@@ -104,20 +101,44 @@ public class AddressList extends AppCompatActivity {
                 String selectedContactID = selectedContact.getId();
 
                 //Get contact ID and send to EditContact
-                Intent intent = new Intent(AddressList.this, EditContact.class);
+                Intent intent = new Intent(AddressList.this, ViewContact.class);
                 intent.putExtra("contactId", selectedContactID);
                 intent.putExtra("loadContact", true);
                 AddressList.this.startActivity(intent);
 
 
-                Toast.makeText(getApplicationContext(), selectedContactID, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), selectedContactID, Toast.LENGTH_LONG).show();
             }
         });
     }
     public void resetDatabase(View view){
-        SqliteUtilities db = new SqliteUtilities(this);
-        db.deleteTable();
+        final SqliteUtilities db = new SqliteUtilities(this);
+        //Confirm delete user alert
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Are you sure?");
+        builder1.setCancelable(true);
 
-        lstContactList.invalidateViews();
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        db.deleteTable();
+
+                        finish();
+                        startActivity(getIntent());
+                        db.close();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert1 = builder1.create();
+        alert1.show();
     }
 }
